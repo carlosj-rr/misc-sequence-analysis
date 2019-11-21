@@ -1,9 +1,18 @@
-#Function to perform concatenations in R
+#!/usr/bin/R
+
+#Function to perform concatenations in R. INPUT ALIGNMENTS MUST BE IN PHYLIP.
+
 #Inputs:
+#A. 'someGeneList', a table of alignment filenames that looks like this:
 
-#A table of alignment filenames that looks like this:
+#       fileName
+#1 EOG8B00NV.phy
+#2 EOG8B00NW.phy
+#3 EOG8B00P0.phy
 
-#sppClTable must look like this in R:
+#B. 'sppClTable', a table of species names and the clade they belong to. Must look like this:
+# NOTE: Important - species names must be identical through all alignments.
+# NOTE: If the cladeName is not known or not important, just fill the column with "Unknown".
 
 #  cladeName sppName
 #1   Clade1 Cholhoff
@@ -12,13 +21,6 @@
 #4   Clade2 Loxoafri
 #5   Clade2 Proccape
 #6   Clade3 Ailumela
-
-#someGeneList must look like this in R:
-
-#       fileName
-#1 EOG8B00NV.phy
-#2 EOG8B00NW.phy
-#3 EOG8B00P0.phy
 
 concatInPhy<-function(someGeneList,sppClTable,outName) {
  outName<-as.character(outName)
@@ -79,7 +81,7 @@ reorganize<-function(sppClSpp,dataset) {
 }
 
 
-
+# WATCH OUT: FUNCTIONS AFTER THIS LINE ARE NOT WORKING PROPERLY...
 concatInFas<-function(someGeneList,sppClTable,outName) { #*****STILL NOT PROPERLY WORKING******* The functions for importing phy and fas are not the same when the "as.character=TRUE" argument is given, on phy the data gets imported as a character matrix (works well), and on fasta it gets imported as a list of character vectors, I must find a way to convert the list of character vectors into a char matrix.
  outName<-as.character(outName)
  firstAli<-read.dna(file=as.character(someGeneList$fileName[1]),format="fasta",as.character=TRUE)
